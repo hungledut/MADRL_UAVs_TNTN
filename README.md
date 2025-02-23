@@ -11,4 +11,7 @@ pip install matplotlib
 ~~~
 py main.py 
 ~~~
+### Experimental Results
+![fig1](images/result_reward.png)
+![fig2](images/result_user.png)
 
