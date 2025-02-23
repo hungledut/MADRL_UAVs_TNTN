@@ -1,6 +1,6 @@
 ## Multi-agent Deep Reinforcement Learning for UAVs in TNTN Network 🎮
 ### Install fundamental libraries for customed UAV environment☀️
-Install GYM to customed environment and mathplotlib to visualize the environment
+Install GYM to custome environment and mathplotlib to visualize the environment
 ~~~
 pip install gymnasium 
 ~~~
