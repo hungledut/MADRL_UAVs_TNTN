@@ -7,7 +7,7 @@ pip install gymnasium
 ~~~
 pip install matplotlib
 ~~~
-### Training our own model🤖
+### Training our model🤖
 ~~~
 py train.py 
 ~~~
