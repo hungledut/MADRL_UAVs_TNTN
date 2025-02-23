@@ -9,6 +9,6 @@ pip install matplotlib
 ~~~
 ### Training our model🤖
 ~~~
-py train.py 
+py main.py 
 ~~~
 
