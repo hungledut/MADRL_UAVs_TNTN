@@ -70,7 +70,7 @@ class UAV_Environment(gym.Env):
 
         # Define the agent and target location; randomly chosen in `reset` and updated in `step`
         self.uavs_location = np.zeros((2, self.uavs)) + self.size/2
-        self.users_location = np.random.uniform(-self.size/2, self.size/2, (2, self.users))
+        self.users_location = np.random.uniform( -self.size/2, self.size/2, (2, self.users))
         self.mBS = np.zeros((2,1)) + self.size/2
 
         self.UAV0_behavior = np.zeros((2, self.max_step+1)) + self.size/2
@@ -295,11 +295,11 @@ class UAV_Environment(gym.Env):
         ###############################################################################################################
 
         ####################################################### Observation ###########################################
-        O_UAV0 = np.concatenate((self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV0 = np.concatenate((np.array([0]),self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
         # print('O_UAV0=',O_UAV0.shape)
-        O_UAV1 = np.concatenate((self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV1 = np.concatenate((np.array([1]),self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
         # print('O_UAV1=',O_UAV1.shape)
-        O_UAV2 = np.concatenate((self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV2 = np.concatenate((np.array([2]),self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
         # print('O_UAV2=',O_UAV2.shape)
         ###############################################################################################################
 
@@ -397,10 +397,10 @@ class UAV_Environment(gym.Env):
 
         self.step_ = 0
 
-        O_UAV0 = np.concatenate((self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV0 = np.concatenate((np.array([0]),self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
         # print('O_UAV0=',O_UAV0.shape)
-        O_UAV1 = np.concatenate((self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV1 = np.concatenate((np.array([1]),self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
         # print('O_UAV1=',O_UAV1.shape)
-        O_UAV2 = np.concatenate((self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV2 = np.concatenate((np.array([2]),self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
         # print('O_UAV2=',O_UAV2.shape)
         return O_UAV0, O_UAV1, O_UAV2

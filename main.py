@@ -18,15 +18,15 @@ from policy import DQN
 
 
 # Hyperparameters
-learning_rate = 0.0001
+learning_rate = 0.001
 gamma = 0.99
 epsilon = 1
 epsilon_min = 0.3
-epsilon_decay = 0.9997
+epsilon_decay = 0.9996
 batch_size = 128
 target_update_freq = 1000
 memory_size = 10000
-episodes = 8000
+episodes = 4000
 max_step = 50
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -111,14 +111,15 @@ def optimize_model():
 if __name__ == '__main__':
     print('device: ', device)
     env = UAV_Environment(max_step = max_step)
-    policy_net0 = DQN(207, 5).to(device)
-    target_net0 = DQN(207, 5).to(device)
+    policy_net0 = DQN(308, 5).to(device)
+    target_net0 = DQN(308, 5).to(device)
 
-    policy_net1 = DQN(207, 5).to(device)
-    target_net1 = DQN(207, 5).to(device)
+    policy_net1 = DQN(308, 5).to(device)
+    target_net1 = DQN(308, 5).to(device)
 
-    policy_net2 = DQN(207, 5).to(device)
-    target_net2 = DQN(207, 5).to(device)
+    policy_net2 = DQN(308, 5).to(device)
+    target_net2 = DQN(308, 5).to(device)
+
     optimizer0 = optim.Adam(policy_net0.parameters(), lr=learning_rate)
     optimizer1 = optim.Adam(policy_net1.parameters(), lr=learning_rate)
     optimizer2 = optim.Adam(policy_net2.parameters(), lr=learning_rate)
