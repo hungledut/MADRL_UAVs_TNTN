@@ -73,9 +73,9 @@ class UAV_Environment(gym.Env):
         self.users_location = np.random.uniform( -self.size/2, self.size/2, (2, self.users))
         self.mBS = np.zeros((2,1)) + self.size/2
 
-        self.UAV0_behavior = np.zeros((2, self.max_step+1)) + self.size/2
-        self.UAV1_behavior = np.zeros((2, self.max_step+1)) + self.size/2
-        self.UAV2_behavior = np.zeros((2, self.max_step+1)) + self.size/2
+        self.UAV0_behavior = np.zeros((2, self.max_step)) + self.size/2
+        self.UAV1_behavior = np.zeros((2, self.max_step)) + self.size/2
+        self.UAV2_behavior = np.zeros((2, self.max_step)) + self.size/2
 
         self.heatmap_UAV0 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_UAV1 = np.zeros((self.grid_num,self.grid_num))
@@ -385,9 +385,9 @@ class UAV_Environment(gym.Env):
         self.unsatisfied_users = np.zeros(self.users)
         self.users_location = np.random.uniform(-self.size/2, self.size/2, (2, self.users))
 
-        self.UAV0_behavior = np.zeros((2, self.max_step+1)) + self.size/2
-        self.UAV1_behavior = np.zeros((2, self.max_step+1)) + self.size/2
-        self.UAV2_behavior = np.zeros((2, self.max_step+1)) + self.size/2
+        self.UAV0_behavior = np.zeros((2, self.max_step)) + self.size/2
+        self.UAV1_behavior = np.zeros((2, self.max_step)) + self.size/2
+        self.UAV2_behavior = np.zeros((2, self.max_step)) + self.size/2
 
         self.heatmap_UAV0 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_UAV1 = np.zeros((self.grid_num,self.grid_num))

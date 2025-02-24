@@ -246,6 +246,11 @@ for episode in range(1,episodes+1):
         # plt.show()
         plt.close()
 
+        ################ save 3 models ######################
+        torch.save(policy_net0.state_dict(), 'policy0_weights.pth')
+        torch.save(policy_net1.state_dict(), 'policy1_weights.pth')
+        torch.save(policy_net2.state_dict(), 'policy2_weights.pth')
+
     epsilon = max(epsilon_min, epsilon_decay * epsilon)
 
 avg_rewards = []
@@ -281,6 +286,7 @@ plt.legend()
 plt.savefig("result_user.png")
 # plt.show()
 plt.close()
+
 
 
 
