@@ -21,10 +21,7 @@ Apply Multi-agent DRL with Proximal Policy Optimization (PPO)
 ![fig1](images/result_reward.png)
 <br> **The percentage of satisfied users on each episode** <br>
 ![fig2](images/result_user.png)
-<br> **Test case 1** <br>
-![fig3](images/TC1_behavior.png)
-![fig4](images/TC1_step.png)
-<br> **Test case 2** <br>
-![fig3](images/TC2_behavior.png)
-![fig4](images/TC2_step.png)
+<br> **Test** <br>
+![fig3](images/result.png)
+![fig4](images/result_step_.png)
 
