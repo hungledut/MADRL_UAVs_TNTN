@@ -20,13 +20,13 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 max_step = 50
 
 if __name__ == '__main__':
-    policy0 = DQN(308, 5).to(device)
-    policy1 = DQN(308, 5).to(device)
-    policy2 = DQN(308, 5).to(device)
+    policy0 = DQN(106, 5).to(device)
+    policy1 = DQN(106, 5).to(device)
+    policy2 = DQN(106, 5).to(device)
 
-    policy0.load_state_dict(torch.load('weights/policy0_weights.pth'))
-    policy1.load_state_dict(torch.load('weights/policy1_weights.pth'))
-    policy2.load_state_dict(torch.load('weights/policy2_weights.pth'))
+    policy0.load_state_dict(torch.load('weights_dqn/policy0_weights.pth'))
+    policy1.load_state_dict(torch.load('weights_dqn/policy1_weights.pth'))
+    policy2.load_state_dict(torch.load('weights_dqn/policy2_weights.pth'))
 
     env = UAV_Environment(max_step = max_step)
 

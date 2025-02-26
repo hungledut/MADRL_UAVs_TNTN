@@ -72,16 +72,17 @@ class UAV_Environment(gym.Env):
         self.uavs_location = np.zeros((2, self.uavs)) + self.size/2
         self.users_location = np.random.uniform( -self.size/2, self.size/2, (2, self.users))
         self.mBS = np.zeros((2,1)) + self.size/2
-
+        # UAVs behaviour
         self.UAV0_behavior = np.zeros((2, self.max_step)) + self.size/2
         self.UAV1_behavior = np.zeros((2, self.max_step)) + self.size/2
         self.UAV2_behavior = np.zeros((2, self.max_step)) + self.size/2
-
+        # Heatmap
         self.heatmap_UAV0 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_UAV1 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_UAV2 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_satisfied = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_users = np.zeros((self.grid_num,self.grid_num))
+        # Step 
         self.step_ = 0
 
         # Each location is encoded as an element of {0, ..., `size`-1}^2
@@ -106,13 +107,14 @@ class UAV_Environment(gym.Env):
         }
         self.user_action_to_direction = {
             0: np.array([0, 0]),  # remain stationary
-            1: np.array([0,5]),  # up
-            2: np.array([-5, 0]),  # left
-            3: np.array([0, -5]),  # down
-            4: np.array([5, 0]),  # right
+            1: np.array([0, 0]),  # up
+            2: np.array([0, 0]),  # left
+            3: np.array([0, 0]),  # down
+            4: np.array([0, 0]),  # right
         }
     def step(self, actions):
 
+        ########################### Reset each step ##################################################
         self.connect = np.zeros((self.uavs+1, self.users))
         self.unsatisfied_users = np.zeros(self.users)
         self.data_rate_max_index = np.zeros(self.users) - 1000
@@ -122,6 +124,7 @@ class UAV_Environment(gym.Env):
         self.heatmap_UAV2 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_satisfied = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_users = np.zeros((self.grid_num,self.grid_num))
+        ##############################################################################################
 
         ################################# UAVs take the actions ################################################
         for (action,k) in zip(actions,range(self.uavs)):
@@ -295,12 +298,13 @@ class UAV_Environment(gym.Env):
         ###############################################################################################################
 
         ####################################################### Observation ###########################################
-        O_UAV0 = np.concatenate((np.array([0]),self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV0 = np.concatenate((self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2)))
         # print('O_UAV0=',O_UAV0.shape)
-        O_UAV1 = np.concatenate((np.array([1]),self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV1 = np.concatenate((self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2)))
         # print('O_UAV1=',O_UAV1.shape)
-        O_UAV2 = np.concatenate((np.array([2]),self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV2 = np.concatenate((self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2)))
         # print('O_UAV2=',O_UAV2.shape)
+
         ###############################################################################################################
 
         ####################################### UAV behavior ##########################################################
@@ -385,10 +389,12 @@ class UAV_Environment(gym.Env):
         self.unsatisfied_users = np.zeros(self.users)
         self.users_location = np.random.uniform(-self.size/2, self.size/2, (2, self.users))
 
+        ####################### UAVs behaviour ########################################
         self.UAV0_behavior = np.zeros((2, self.max_step)) + self.size/2
         self.UAV1_behavior = np.zeros((2, self.max_step)) + self.size/2
         self.UAV2_behavior = np.zeros((2, self.max_step)) + self.size/2
 
+        ####################### Heatmap ########################################
         self.heatmap_UAV0 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_UAV1 = np.zeros((self.grid_num,self.grid_num))
         self.heatmap_UAV2 = np.zeros((self.grid_num,self.grid_num))
@@ -397,10 +403,10 @@ class UAV_Environment(gym.Env):
 
         self.step_ = 0
 
-        O_UAV0 = np.concatenate((np.array([0]),self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV0 = np.concatenate((self.uavs_location[:,0],self.uavs_location[:,1],self.uavs_location[:,2],np.reshape(self.heatmap_UAV0,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2)))
         # print('O_UAV0=',O_UAV0.shape)
-        O_UAV1 = np.concatenate((np.array([1]),self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV1 = np.concatenate((self.uavs_location[:,1],self.uavs_location[:,0],self.uavs_location[:,2],np.reshape(self.heatmap_UAV1,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2)))
         # print('O_UAV1=',O_UAV1.shape)
-        O_UAV2 = np.concatenate((np.array([2]),self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2),np.array([self.step_])))
+        O_UAV2 = np.concatenate((self.uavs_location[:,2],self.uavs_location[:,0],self.uavs_location[:,1],np.reshape(self.heatmap_UAV2,self.grid_num**2),np.reshape(self.heatmap_satisfied,self.grid_num**2),np.reshape(self.heatmap_users,self.grid_num**2)))
         # print('O_UAV2=',O_UAV2.shape)
         return O_UAV0, O_UAV1, O_UAV2
