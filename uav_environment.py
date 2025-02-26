@@ -290,7 +290,7 @@ class UAV_Environment(gym.Env):
                 x = int((UAV2_users_location[i][0]+self.size/2)//self.grid_size)
                 y = int((UAV2_users_location[i][1]+self.size/2)//self.grid_size)
                 self.heatmap_UAV2[x,y] += 1
-        # heatmap of satisfied users
+        # heatmap of unsatisfied users
         if len(satisfied_users) > 0:
             for i in range(len(satisfied_users)):
                 x = int((satisfied_users[i][0]+self.size/2)//self.grid_size)

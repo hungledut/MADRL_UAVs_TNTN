@@ -291,7 +291,7 @@ class PPO:
 has_continuous_action_space = False
 
 max_ep_len = 300                 # max timesteps in one episode
-max_training_timesteps = int(9e5)   # break training loop if timeteps > max_training_timesteps
+max_training_timesteps = int(3e5)   # break training loop if timeteps > max_training_timesteps
 
 print_freq = max_ep_len * 4     # print avg reward in the interval (in num timesteps)
 log_freq = max_ep_len * 2       # log avg reward in the interval (in num timesteps)
@@ -329,7 +329,7 @@ if __name__ == '__main__':
         l_t_0 = 0
         l_t_1 = 0
         l_t_2 = 0
-        w = 0.5
+        w = 0.8
         percentage_users = []
 
         O_UAV0, O_UAV1, O_UAV2 = env.reset()
