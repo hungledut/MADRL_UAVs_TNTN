@@ -9,11 +9,11 @@ pip install matplotlib
 ~~~
 ### Train model🤖
 ~~~
-py train.py 
+py train_ppo.py 
 ~~~
 ### Test model🌗
 ~~~
-py test.py 
+py test_ppo.py 
 ~~~
 ### Experimental Results⚡️
 ![fig1](images/result_reward.png)
