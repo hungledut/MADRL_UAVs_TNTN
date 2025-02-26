@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 class UAV_Environment(gym.Env):
 
     def __init__(self, users = 250, uavs = 3,
-                 size = 2000, # Target area: size x size
+                size = 2000, # Target area: size x size
                 v_0 = 80, # (m/s)
                 tau = 1, # (s)
                 UAV_coverage = 400, # (m)
