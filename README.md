@@ -19,10 +19,10 @@ py test_ppo.py
 Apply Multi-agent DRL with Proximal Policy Optimization (PPO)
 ![fig1](images/result_reward.png)
 ![fig2](images/result_user.png)
-Test case 1 
+<br> ***Test case 1** <br>
 ![fig3](images/TC1_behavior.png)
 ![fig4](images/TC1_step.png)
-Test case 2 
+<br> **Test case 2** <br>
 ![fig3](images/TC2_behavior.png)
 ![fig4](images/TC2_step.png)
 
