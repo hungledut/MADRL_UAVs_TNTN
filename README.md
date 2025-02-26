@@ -23,5 +23,5 @@ Apply Multi-agent DRL with Proximal Policy Optimization (PPO)
 ![fig2](images/result_user.png)
 <br> **Test** <br>
 ![fig3](images/result.png)
-![fig4](images/result_step_.png)
+![fig4](images/result_step.png)
 
