@@ -290,8 +290,8 @@ class PPO:
 
 has_continuous_action_space = False
 
-max_ep_len = 50                 # max timesteps in one episode
-max_training_timesteps = int(4e5)   # break training loop if timeteps > max_training_timesteps
+max_ep_len = 80                 # max timesteps in one episode
+max_training_timesteps = int(8e5)   # break training loop if timeteps > max_training_timesteps
 
 print_freq = max_ep_len * 4     # print avg reward in the interval (in num timesteps)
 log_freq = max_ep_len * 2       # log avg reward in the interval (in num timesteps)
@@ -301,7 +301,7 @@ action_std = None
 
 update_timestep = max_ep_len * 4      # update policy every n timesteps
 K_epochs = 40               # update policy for K epochs
-eps_clip = 0.01              # clip parameter for PPO
+eps_clip = 0.05              # clip parameter for PPO
 gamma = 0.99                # discount factor
 
 lr_actor = 0.0003       # learning rate for actor network
@@ -311,9 +311,9 @@ time_step = 0
 i_episode = 0
 
 # initialize a PPO agent
-ppo_agent0 = PPO(306, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
-ppo_agent1 = PPO(306, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
-ppo_agent2 = PPO(306, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
+ppo_agent0 = PPO(206, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
+ppo_agent1 = PPO(206, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
+ppo_agent2 = PPO(206, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
 
 env = UAV_Environment(max_step = max_ep_len)
 
@@ -403,7 +403,7 @@ if __name__ == '__main__':
         rewards_per_episode.append(current_ep_reward)
         percentage_user_episode.append(S_t*100/250)
         print('Episode ', i_episode, ': Reward = ', current_ep_reward ,'The percentage of satisfied users = ', S_t*100/250 , '%')
-        if time_step % (50*100) == 0:
+        if time_step % (max_ep_len*100) == 0:
             plt.figure()
             env.plot()
             plt.plot(percentage_users)

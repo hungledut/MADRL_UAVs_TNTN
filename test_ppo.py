@@ -292,8 +292,8 @@ class PPO:
 
 has_continuous_action_space = False
 
-max_ep_len = 50                 # max timesteps in one episode
-max_training_timesteps = int(4e5)   # break training loop if timeteps > max_training_timesteps
+max_ep_len = 80                 # max timesteps in one episode
+max_training_timesteps = int(10e5)   # break training loop if timeteps > max_training_timesteps
 
 print_freq = max_ep_len * 4     # print avg reward in the interval (in num timesteps)
 log_freq = max_ep_len * 2       # log avg reward in the interval (in num timesteps)
@@ -303,16 +303,16 @@ action_std = None
 
 update_timestep = max_ep_len * 4      # update policy every n timesteps
 K_epochs = 40               # update policy for K epochs
-eps_clip = 0.01              # clip parameter for PPO
+eps_clip = 0.05              # clip parameter for PPO
 gamma = 0.99                # discount factor
 
 lr_actor = 0.0003       # learning rate for actor network
 lr_critic = 0.001       # learning rate for critic network
 
 # initialize a PPO agent
-ppo_agent0 = PPO(306, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
-ppo_agent1 = PPO(306, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
-ppo_agent2 = PPO(306, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
+ppo_agent0 = PPO(206, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
+ppo_agent1 = PPO(206, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
+ppo_agent2 = PPO(206, 5, lr_actor, lr_critic, gamma, K_epochs, eps_clip, has_continuous_action_space, action_std)
 
 
 env = UAV_Environment(max_step = max_ep_len)
@@ -322,6 +322,7 @@ if __name__ == '__main__':
     ppo_agent0.load('weights_ppo/ppo_agent0.pth')
     ppo_agent1.load('weights_ppo/ppo_agent1.pth')
     ppo_agent2.load('weights_ppo/ppo_agent2.pth')
+    percentage_users = []
 
     ###### test model ##########
     O_UAV0, O_UAV1, O_UAV2 = env.reset()
@@ -330,4 +331,16 @@ if __name__ == '__main__':
         action1 = ppo_agent1.select_action(O_UAV1)
         action2 = ppo_agent2.select_action(O_UAV2)
         O_UAV0, O_UAV1, O_UAV2, S, N_UAV0, N_UAV1, N_UAV2 = env.step([action0,action1,action2])
+        percentage_users.append(S*100/250)
     env.plot()
+
+    plt.figure()
+    env.plot()
+    plt.plot(percentage_users)
+    plt.ylim(0, 100)
+    plt.xlabel('Movement step')
+    plt.ylabel('The percentage of satisfied users (%)')
+    plt.title('The percentage of satisfied users on each step')
+    plt.savefig("result_step.png")
+    # plt.show()
+    plt.close()
