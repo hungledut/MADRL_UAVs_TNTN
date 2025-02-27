@@ -7,11 +7,11 @@ pip install gymnasium
 ~~~
 pip install matplotlib
 ~~~
-### Train model🤖
+### Train MADRL PPO model🤖
 ~~~
 py train_ppo.py 
 ~~~
-### Test model🌗
+### Test MADRL PPO model🌗
 ~~~
 py test_ppo.py 
 ~~~
