@@ -301,7 +301,7 @@ action_std = None
 
 update_timestep = max_ep_len * 4      # update policy every n timesteps
 K_epochs = 40               # update policy for K epochs
-eps_clip = 0.1              # clip parameter for PPO
+eps_clip = 0.2              # clip parameter for PPO
 gamma = 0.99                # discount factor
 
 lr_actor = 0.0003       # learning rate for actor network
@@ -329,7 +329,7 @@ if __name__ == '__main__':
         l_t_0 = 0
         l_t_1 = 0
         l_t_2 = 0
-        w = 0.8
+        w = 0.6
         percentage_users = []
 
         O_UAV0, O_UAV1, O_UAV2 = env.reset()
@@ -342,7 +342,7 @@ if __name__ == '__main__':
             action1 = ppo_agent1.select_action(O_UAV1)
             action2 = ppo_agent2.select_action(O_UAV2)
 
-            next_O_UAV0, next_O_UAV1, next_O_UAV2, S, N_UAV0, N_UAV1, N_UAV2 = env.step([action0, action1, action2])
+            O_UAV0, O_UAV1, O_UAV2, S, N_UAV0, N_UAV1, N_UAV2 = env.step([action0, action1, action2])
             if S > S_t:
                 g_t = 1
             elif S < S_t:
@@ -403,7 +403,7 @@ if __name__ == '__main__':
         rewards_per_episode.append(current_ep_reward)
         percentage_user_episode.append(S_t*100/250)
         print('Episode ', i_episode, ': Reward = ', current_ep_reward ,'The percentage of satisfied users = ', S_t*100/250 , '%')
-        if time_step % (max_ep_len*100) == 0:
+        if time_step % (max_ep_len*50) == 0:
             plt.figure()
             env.plot()
             plt.plot(percentage_users)

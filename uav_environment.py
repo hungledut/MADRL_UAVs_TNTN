@@ -8,9 +8,9 @@ class UAV_Environment(gym.Env):
 
     def __init__(self, users = 250, uavs = 3,
                 size = 2000, # Target area: size x size
-                v_0 = 20, # (m/s)
+                v_0 = 30, # (m/s)
                 tau = 1, # (s)
-                UAV_coverage = 400, # (m)
+                UAV_coverage = 500, # (m)
                 mBS_coverage = 3000, # (m)
                 ###################### Channel model of UAVS
                 psi_L = 1,
@@ -18,9 +18,9 @@ class UAV_Environment(gym.Env):
                 K = 50,
                 d = 1, # (m)
                 lambda_c = 0.05, # (m) = v/f = 3x10^8 (m/s)/ 5.8x10^9 (Hz) ?
-                h = 400, # (m)
+                h = 500, # (m)
                 alpha = 2.7,
-                P_UAV = 2, # 30 (dBm) -> W
+                P_UAV = 2.5, # (W)
                 sigma_square = 1/(1e12),  # -90 (dBm) -> W
                 ###################### Channel model of mBS
                 P_mBS = 54, # 76 (dBm) -> dB
@@ -107,10 +107,10 @@ class UAV_Environment(gym.Env):
         }
         self.user_action_to_direction = {
             0: np.array([0, 0]),  # remain stationary
-            1: np.array([0, 1]),  # up
-            2: np.array([1, 0]),  # left
-            3: np.array([0, -1]),  # down
-            4: np.array([-1, 0]),  # right
+            1: np.array([0, 5]),  # up
+            2: np.array([5, 0]),  # left
+            3: np.array([0, -5]),  # down
+            4: np.array([-5, 0]),  # right
         }
     def step(self, actions):
 
@@ -364,9 +364,9 @@ class UAV_Environment(gym.Env):
             if self.data_rate_max_index[i] == -1000:
                 plt.scatter(self.users_location[0,i],self.users_location[1,i], marker = 'x', color = 'gray')
 
-        plt.plot(self.UAV0_behavior[0,:],self.UAV0_behavior[1,:], color = 'r')
-        plt.plot(self.UAV1_behavior[0,:],self.UAV1_behavior[1,:], color = 'g')
-        plt.plot(self.UAV2_behavior[0,:],self.UAV2_behavior[1,:], color = 'b')
+        plt.scatter(self.UAV0_behavior[0,:],self.UAV0_behavior[1,:], color = 'r', s=1)
+        plt.scatter(self.UAV1_behavior[0,:],self.UAV1_behavior[1,:], color = 'g', s=1)
+        plt.scatter(self.UAV2_behavior[0,:],self.UAV2_behavior[1,:], color = 'b', s=1)
 
         plt.xlabel('x(m)')
         plt.ylabel('y(m)')
