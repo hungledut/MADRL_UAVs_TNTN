@@ -17,6 +17,8 @@ py test_ppo.py
 ~~~
 ### Experimental Results of MADRL PPO⚡️
 Apply Multi-agent DRL with Proximal Policy Optimization (PPO)
+<br> **Training process** <br>
+![fig0](images/training_process.jpg)
 <br> **The total of rewards on each episode** <br>
 ![fig1](images/result_reward.png)
 <br> **The percentage of satisfied users on each episode** <br>
